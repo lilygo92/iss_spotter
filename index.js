@@ -1,28 +1,37 @@
-const { fetchMyIP , fetchCoordsByIP , fetchISSFlyoverTimes } = require('./iss');
+const { nextISSTimesForMyLocation } = require('./iss');
 
-fetchMyIP((error, ip) => {
+nextISSTimesForMyLocation((error, passTimes) => {
   if (error) {
-    console.log("It didn't work!" , error);
-    return;
+    return console.log("It didn't work!", error);
   }
-
-  console.log('It worked! Returned IP:' , ip);
+  // success, print out the deets!
+  console.log(passTimes);
 });
 
-fetchCoordsByIP("108.180.20.23", (error, data) => {
-  if (error) {
-    console.log("It didn't work!" , error);
-    return;
-  }
 
-  console.log('It worked! Returned latitude and longitude:' , data);
-});
+// fetchMyIP((error, ip) => {
+//   if (error) {
+//     console.log("It didn't work!" , error);
+//     return;
+//   }
 
-fetchISSFlyoverTimes({ latitude: 49.2827291, longitude: -123.1207375 }, (error, data) => {
-  if (error) {
-    console.log("It didn't work!" , error);
-    return;
-  }
+//   console.log('It worked! Returned IP:' , ip);
+// });
 
-  console.log('It worked! Returned risetime and duration:' , data);
-});
+// fetchCoordsByIP("108.180.20.23", (error, data) => {
+//   if (error) {
+//     console.log("It didn't work!" , error);
+//     return;
+//   }
+
+//   console.log('It worked! Returned latitude and longitude:' , data);
+// });
+
+// fetchISSFlyoverTimes({ latitude: 49.2827291, longitude: -123.1207375 }, (error, data) => {
+//   if (error) {
+//     console.log("It didn't work!" , error);
+//     return;
+//   }
+
+//   console.log('It worked! Returned risetime and duration:' , data);
+// });
