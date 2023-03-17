@@ -15,4 +15,21 @@ const fetchMyIP = function(callback) {
   });
 };
 
-module.exports = { fetchMyIP };
+const fetchCoordsByIP = function(ip, callback) {
+  request(`http://ipwho.is/${ip}`, (error, response, body) => {
+    if (error) return callback(error, null);
+
+    const data = JSON.parse(body);
+    if (data.success === false) {
+      const msg = `Success status was ${data.success}. Server message says: ${data.message} when fetching for IP ${data.ip}`;
+      callback(Error(msg), null);
+      return;
+    }
+
+    const {latitude , longitude} = data;
+
+    callback(null, {latitude , longitude});
+  });
+};
+
+module.exports = { fetchMyIP , fetchCoordsByIP };
